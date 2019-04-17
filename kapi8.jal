@@ -1,0 +1,34 @@
+include 16f628_4i
+include jlib
+
+disable_a_d_functions
+port_a_direction = 0x00  -- butonlar
+port_b_direction = 0xFF  -- display
+
+var byte d0 = 0 , d1 = 0 , x = 0 ,s = 0
+port_b = 0x00
+
+
+
+pin_a6 = high pin_a7 = low
+
+forever loop
+   if pin_b0 == high then while pin_b0 == high loop end loop x = 1
+   elsif pin_b1 == high then while pin_b1 == high loop end loop x = 2
+   elsif pin_b2 == high then while pin_b2 == high loop end loop x = 3
+   elsif pin_b3 == high then while pin_b3 == high loop end loop x = 4
+   elsif pin_b4 == high then while pin_b4 == high loop end loop x = 5
+   elsif pin_b5 == high then while pin_b5 == high loop end loop x = 6
+   elsif pin_b6 == high then while pin_b6 == high loop end loop x = 7
+   elsif pin_b7 == high then while pin_b7 == high loop end loop x = 8
+   else x = 0
+   end if
+   
+   if x != 0 & s == 0 & x == 5 then s = s + 1
+   elsif x != 0 & s == 1 then
+     if x == 6 then pin_a7 = high pin_a6 = low delay_500ms pin_a6 = high pin_a7 = low -- kapý açýldý
+     end if
+     s = 0
+   end if
+
+end loop
